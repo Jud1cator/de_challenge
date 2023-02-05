@@ -18,3 +18,7 @@
 ![Alt text](images/dwh.jpg "DWH")
 
 ![Alt text](images/dag2.png "DAG2")
+
+### Итоговые витрины
+Дашбоард: http://158.160.51.203:3000/metabase/dashboard/2-base
+![Alt text](images/cdm.jpg "CDM")
