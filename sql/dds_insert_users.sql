@@ -9,7 +9,7 @@ select
 from
 	staging.stg_events
 where
-	staging.stg_events.event_timestamp::date = '2022-09-30'::date
+	staging.stg_events.event_timestamp::date = '{{ ds }}'::date
 on conflict (custom_id, domain_id) do update set
 	custom_id = EXCLUDED.custom_id,
 	domain_id = EXCLUDED.domain_id

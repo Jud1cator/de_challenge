@@ -24,4 +24,16 @@ update set
 	url = excluded.url,
 	url_scheme = excluded.url_scheme,
 	url_port = excluded.url_port,
-	medium = excluded.medium
+	medium = excluded.medium;
+
+insert into dds.dds_page
+(url,url_path)
+(select distinct 
+page_url as url,
+page_url_path as url_path
+from staging.stg_events 
+where staging.stg_events.event_timestamp::date = '2022-09-30'::date)
+on conflict (url,url_path) do 
+update set 
+	url = excluded.url,
+	url_path = excluded.url_path;

@@ -48,14 +48,16 @@ medium  text not null,
 source text  not null,
 content text not null,
 campaign text not null
+constraint unique_utm unique (medium, source, content, campaign)
 );
 
 drop table if exists dds.dds_page ;
 create table dds.dds_page
 (
-id serial not null,
+id serial primary key,
 url text not null,
-url_path text not null)
+url_path text not null,
+constraint dds_page_unique unique (url,url_path))
 ;
 
 
@@ -96,7 +98,8 @@ CREATE table if not exists dds.dds_os(
     id   SERIAL,
     "type" varchar(30),
     "name"  varchar(30),
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    constraint unique_os unique (type, name)
     );
    
 CREATE table if not exists dds.dds_user(
@@ -122,6 +125,7 @@ CREATE table if not exists dds.dds_devices(
     is_mobile boolean,
     os_id int8,
     PRIMARY KEY (id),
+    constraint unique_device unique (type, os_id),
     FOREIGN KEY (os_id) REFERENCES dds_os(id) ON UPDATE CASCADE
     );
    
