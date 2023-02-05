@@ -53,9 +53,10 @@ campaign text not null
 drop table if exists dds.dds_page ;
 create table dds.dds_page
 (
-id serial not null,
+id serial primary key,
 url text not null,
-url_path text not null)
+url_path text not null,
+constraint dds_page_unique unique (url,url_path))
 ;
 
 
