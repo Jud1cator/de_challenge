@@ -6,7 +6,7 @@ create view cdm.purchased_products as (
 with e1 as (
 	select 	
 		e.event_timestamp,
-		p.url_path,
+		left(url_path,8) as url_path,
 		c.user_id,
 		row_number() over (partition by c.user_id
 					order by e.event_timestamp desc)
@@ -19,10 +19,10 @@ with e1 as (
 select 
 		date_trunc('hour', event_timestamp) as "hour",
 		(count("url_path")-1) as products_purchased
-		
 	from e1
+	where ("row_number"=1 and url_path = '/confirmation')
+		or left(url_path,8) = '/product'
 	group by ("hour")
-
 )
 
 --where ("row_number"=1) and (url_path = '/confirmation')
