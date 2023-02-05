@@ -48,6 +48,7 @@ medium  text not null,
 source text  not null,
 content text not null,
 campaign text not null
+
 );
 
 drop table if exists dds.dds_page ;
