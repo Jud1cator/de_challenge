@@ -48,7 +48,7 @@ medium  text not null,
 source text  not null,
 content text not null,
 campaign text not null
-
+constraint unique_utm unique (medium, source, content, campaign)
 );
 
 drop table if exists dds.dds_page ;
