@@ -99,18 +99,20 @@ CREATE table if not exists dds.dds_os(
    
 CREATE table if not exists dds.dds_user(
     id   SERIAL,
-    custom_id varchar(40),
-    domain_id varchar(40),
+    custom_id text,
+    domain_id text,
+    constraint unique_user unique (custom_id, domain_id),
     PRIMARY KEY (id)
-    );
+);
    
 CREATE table if not exists dds.dds_zones(
     id   SERIAL,
-    timezone varchar(30),
-    country varchar(3),
-    region_name varchar(30),
+    timezone text,
+    country text,
+    region_name text,
+    constraint unique_zone unique (timezone, country, region_name),
     PRIMARY KEY (id)
-    );
+);
    
 CREATE table if not exists dds.dds_devices(
     id   SERIAL,
