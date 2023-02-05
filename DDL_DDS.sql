@@ -97,7 +97,8 @@ CREATE table if not exists dds.dds_os(
     id   SERIAL,
     "type" varchar(30),
     "name"  varchar(30),
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    constraint unique_os unique (type, name)
     );
    
 CREATE table if not exists dds.dds_user(
@@ -123,6 +124,7 @@ CREATE table if not exists dds.dds_devices(
     is_mobile boolean,
     os_id int8,
     PRIMARY KEY (id),
+    constraint unique_device unique (type, os_id),
     FOREIGN KEY (os_id) REFERENCES dds_os(id) ON UPDATE CASCADE
     );
    
