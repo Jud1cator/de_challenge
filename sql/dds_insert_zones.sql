@@ -11,7 +11,7 @@ select
 from
 	staging.stg_events
 where
-	staging.stg_events.event_timestamp::date = '2022-09-30'::date
+	staging.stg_events.event_timestamp::date = '{{ ds }}'::date
 on conflict (timezone, country, region_name) do update set
 	timezone = EXCLUDED.timezone,
 	country = EXCLUDED.country,

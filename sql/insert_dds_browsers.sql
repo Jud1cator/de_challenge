@@ -8,7 +8,7 @@ INSERT INTO dds.dds_browsers
 	    	browser_user_agent,
 	    	browser_language
 	    FROM staging.stg_events
-	    where (staging.stg_events.event_timestamp::date = '2022-09-30'::date)
+	    where (staging.stg_events.event_timestamp::date = '{{ ds }}'::date)
 	    )
     select distinct 	
 	    	t1.id as type_id,

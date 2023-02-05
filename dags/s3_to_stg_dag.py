@@ -48,4 +48,4 @@ def s3_to_staging():
 
     download >> unzip >> put_to_hdfs >> upload_stg
 
-stg_to_dds_dag_instance = s3_to_staging()
+s3_to_staging_dag = s3_to_staging()
