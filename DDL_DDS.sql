@@ -25,7 +25,8 @@ drop table if exists dds.dds_event_types ;
 create table  dds.dds_event_types 
 (
 id serial primary key,
-event_type_name text not null
+event_type_name text not null,
+constraint event_type_name_unique unique (event_type_name)
 );
 
 drop table if exists dds.dds_referer ;
@@ -35,7 +36,8 @@ id serial primary key,
 url text not null,
 url_scheme text not null,
 url_port int not null,
-medium text not null
+medium text not null,
+constraint dds_referer_unique unique (url,url_scheme,url_port,medium)
 );
 
 drop table if exists dds.dds_utm ;
@@ -99,18 +101,20 @@ CREATE table if not exists dds.dds_os(
    
 CREATE table if not exists dds.dds_user(
     id   SERIAL,
-    custom_id varchar(40),
-    domain_id varchar(40),
+    custom_id text,
+    domain_id text,
+    constraint unique_user unique (custom_id, domain_id),
     PRIMARY KEY (id)
-    );
+);
    
 CREATE table if not exists dds.dds_zones(
     id   SERIAL,
-    timezone varchar(30),
-    country varchar(3),
-    region_name varchar(30),
+    timezone text,
+    country text,
+    region_name text,
+    constraint unique_zone unique (timezone, country, region_name),
     PRIMARY KEY (id)
-    );
+);
    
 CREATE table if not exists dds.dds_devices(
     id   SERIAL,
